@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.wavemaker.connector</groupId>
+        <artifactId>excel-connector</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>excel-connector-impl</artifactId>
+
+    <packaging>jar</packaging>
+    <name>excel-connector-impl</name>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.wavemaker.connector</groupId>
+            <artifactId>excel-connector-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wavemaker.runtime.connector</groupId>
+            <artifactId>wavemaker-app-runtime-connector-impl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.wavemaker.commons</groupId>
+            <artifactId>wavemaker-commons-util</artifactId>
+            <version>10.5.5</version>
+        </dependency>
+    </dependencies>
+</project>
