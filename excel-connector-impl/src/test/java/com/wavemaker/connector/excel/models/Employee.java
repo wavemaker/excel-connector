@@ -1,9 +1,23 @@
 package com.wavemaker.connector.excel.models;
 
-public class Employee{
+import java.util.Date;
+
+public class Employee {
     int sno;
     String name;
     String emailAddress;
+    Date date;
+
+    public Employee() {
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public int getSno() {
         return sno;
@@ -28,12 +42,4 @@ public class Employee{
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-    public Employee(int sno, String name, String emailaddress) {
-        this.sno = sno;
-        this.name = name;
-        this.emailAddress = emailaddress;
-    }
-
-    public Employee(){}
 }
