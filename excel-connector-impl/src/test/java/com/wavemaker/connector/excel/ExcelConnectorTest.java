@@ -28,7 +28,7 @@ public class ExcelConnectorTest {
         List<Map<String, Object>> result = connectorInstance.readExcelAsMap(getClass().getClassLoader().getResourceAsStream("sample.xlsx"),
                 false);
         Assert.assertEquals(4, result.size());
-        Assert.assertEquals("[{Sno=1.0, Email address=a@gmail.com, Name=a}, {Sno=2.0, Email address=b@gmail.com, Name=b}, {Sno=3.0, Email address=c@mail.com, Name=c}, {Sno=4.0, Email address=d@mail.com, Name=d}]", result.toString());
+        Assert.assertEquals("[{Sno=1.0, Email address=a@gmail.com, Date=Wed Mar 27 00:00:00 IST 2019, Name=a}, {Sno=2.0, Email address=b@gmail.com, Date= , Name=b}, {Sno=3.0, Email address=c@mail.com, Date=1994-11-05T08:15:30-05:00, Name=c}, {Sno=4.0, Email address=d@mail.com, Date=1994-11-05T13:15:30Z, Name=d}]", result.toString());
     }
 
     @Test
@@ -37,19 +37,17 @@ public class ExcelConnectorTest {
                 true);
         Assert.assertEquals(4, employeeList.size());
         Assert.assertEquals("c@mail.com", employeeList.get(2).get("emailAddress"));
-        Assert.assertEquals("[{emailAddress=a@gmail.com, sno=1.0, name=a}, {emailAddress=b@gmail.com, sno=2.0, name=b}, {emailAddress=c@mail.com, sno=3.0, name=c}, {emailAddress=d@mail.com, sno=4.0, name=d}]", employeeList.toString());
+        Assert.assertEquals("[{date=Wed Mar 27 00:00:00 IST 2019, emailAddress=a@gmail.com, sno=1.0, name=a}, {date= , emailAddress=b@gmail.com, sno=2.0, name=b}, {date=1994-11-05T08:15:30-05:00, emailAddress=c@mail.com, sno=3.0, name=c}, {date=1994-11-05T13:15:30Z, emailAddress=d@mail.com, sno=4.0, name=d}]", employeeList.toString());
     }
 
     @Test
     public void readExcelAsClass() throws IOException {
         List<Employee> employeeList = connectorInstance.readExcelAsObject(getClass().getClassLoader().getResourceAsStream("sample.xlsx"),
                 Employee.class);
-        employeeList.forEach(employee -> {
-
-        });
         Assert.assertEquals(4, employeeList.size());
         Assert.assertEquals("c@mail.com", employeeList.get(2).getEmailAddress());
         Assert.assertEquals(4, employeeList.get(3).getSno());
+        Assert.assertEquals("Wed Mar 27 00:00:00 IST 2019", employeeList.get(0).getDate().toString());
     }
 
     @Test
