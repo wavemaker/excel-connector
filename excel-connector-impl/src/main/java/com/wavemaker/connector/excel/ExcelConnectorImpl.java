@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wavemaker.commons.util.NamingUtils;
+import com.wavemaker.connector.excel.utils.NamingUtils;
 
 @Service
 @Primary
