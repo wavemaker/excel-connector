@@ -1,15 +1,9 @@
 package com.wavemaker.connector.excel;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wavemaker.connector.excel.utils.NamingUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
@@ -18,10 +12,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wavemaker.connector.excel.utils.NamingUtils;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 @Service
 @Primary
@@ -31,7 +26,7 @@ public class ExcelConnectorImpl implements ExcelConnector {
     public List<Map<String, Object>> readExcelAsMap(InputStream inputStream, boolean convertHeadersToFieldNames) throws IOException {
         List<Map<String, Object>> resultantList = new ArrayList<>();
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-        for (int i = 0;i < workbook.getNumberOfSheets();i++) {
+        for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
             XSSFSheet sheet = workbook.getSheetAt(i);
             Iterator<Row> rowIterator = sheet.rowIterator();
             List<String> headerParams = new ArrayList<>();
@@ -56,6 +51,7 @@ public class ExcelConnectorImpl implements ExcelConnector {
     public <T> List<T> readExcelAsObject(InputStream inputStream, Class<T> t) throws IOException {
         List<Map<String, Object>> listOfEntries = readExcelAsMap(inputStream, true);
         ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.findAndRegisterModules();
         JavaType type = objectMapper.getTypeFactory().
                 constructCollectionType(List.class, t);
         return objectMapper.convertValue(listOfEntries, type);
