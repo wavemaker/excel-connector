@@ -18,6 +18,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.19.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.wavemaker.connector</groupId>
             <artifactId>excel-connector-api</artifactId>
         </dependency>
